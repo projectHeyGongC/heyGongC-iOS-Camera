@@ -12,15 +12,42 @@ import RxSwift
 import SwiftyUserDefaults
 
 class PermissionSettingVC: UIViewController {
-
+    
     @IBOutlet weak var lblCameraRequired: UILabel!
-    @IBOutlet weak var lblMicRequired: UILabel!
+    @IBOutlet weak var lblAudioRequired: UILabel!
     @IBOutlet weak var btnAccept: UIButton!
+    @IBOutlet weak var viewPermission: UIView!
+    
+    private let viewModel = PermissionSettingVM()
+    private var disposebag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setAttributeString(label: lblCameraRequired)
-        setAttributeString(label: lblMicRequired)
+        setAttributeString(label: lblAudioRequired)
+        setObservables()
+        addAction()
+    }
+    
+    private func setObservables(){
+        Observable.combineLatest(viewModel.cameraPermissionRelay, viewModel.audioPermissionRelay)
+        {$0 && $1}
+            .subscribe { [weak self] isEnabled in
+                guard let self = self else { return }
+                btnAccept.backgroundColor = isEnabled ? GCColor.C_FFC000 : GCColor.C_CACACA
+                btnAccept.isEnabled = isEnabled
+            }
+            .disposed(by: disposebag)
+        
+        btnAccept.rx.tap
+            .bind{
+                let storyboard = UIStoryboard.init(name: "QRCodeGenerator", bundle: nil)
+                guard let vc = storyboard.instantiateViewController(withIdentifier: "QRCodeGenerator")as? QRCodeGeneratorVC else {return}
+                
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true, completion: nil)
+            }
+            .disposed(by: disposebag)
     }
     
     private func setAttributeString(label: UILabel){
@@ -28,6 +55,21 @@ class PermissionSettingVC: UIViewController {
         attribute.addAttribute(.foregroundColor, value: GCColor.C_006877, range: (label.text! as NSString).range(of: "필수") )
         label.attributedText = attribute
     }
+    
+    private func addAction(){
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openSettings))
+        
+        viewPermission.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func openSettings(){
+        guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+        
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        }
+    }
+    
     
 }
 
