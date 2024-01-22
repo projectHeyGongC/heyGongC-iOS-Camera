@@ -49,6 +49,8 @@ class QRCodeGeneratorVC: UIViewController {
     }
     
     private func generatorQRCode() -> UIImage?{
+        
+        //QR코드 기기 UUID + 키체인 조합으로 generator 필요.
         let qrData = "https://github.com/Yeji-Jang1210"
         filter.setValue(qrData.data(using: .utf8), forKey: "inputMessage")
         
