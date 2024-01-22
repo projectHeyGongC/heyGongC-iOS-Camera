@@ -15,25 +15,23 @@ import CoreImage.CIFilterBuiltins
 
 class QRCodeGeneratorVC: UIViewController {
     
+    @IBOutlet weak var viewQRCode: UIView!
     @IBOutlet weak var imgViewQRCode: UIImageView!
     
+    var viewModel = QRCodeGeneratorVM()
     
     let session = AVCaptureSession()
     let output: AVCaptureOutput = AVCapturePhotoOutput()
     let previewLayer = AVCaptureVideoPreviewLayer()
+    
     let context = CIContext()
     let filter = CIFilter.qrCodeGenerator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let value = UIInterfaceOrientation.landscapeRight.rawValue
-                    UIDevice.current.setValue(value, forKey: "orientation")
+        view.layer.addSublayer(previewLayer)
         
         checkCameraPermission()
-        
-        view.layer.addSublayer(previewLayer)
-        imgViewQRCode.image = generatorQRCode()
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -41,17 +39,15 @@ class QRCodeGeneratorVC: UIViewController {
         previewLayer.frame = view.bounds
     }
     
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .landscape
-    }
-     override var shouldAutorotate: Bool {
-            return true
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //self.lockOrientation(.landscape)
     }
     
     private func generatorQRCode() -> UIImage?{
         
         //QR코드 기기 UUID + 키체인 조합으로 generator 필요.
-        let qrData = "https://github.com/Yeji-Jang1210"
+        let qrData = "some data"
         filter.setValue(qrData.data(using: .utf8), forKey: "inputMessage")
         
         guard let qrCodeImage = filter.outputImage else { return nil }
@@ -90,14 +86,13 @@ class QRCodeGeneratorVC: UIViewController {
     }
     
     private func setupCamera(){
-        if let captureDevice = AVCaptureDevice.default(for: .video) {
+        if let device = AVCaptureDevice.default(for: .video) {
             do {
-                let input = try AVCaptureDeviceInput(device: captureDevice)
+                let input = try AVCaptureDeviceInput(device: device)
                 if session.canAddInput(input){
                     session.addInput(input)
                 }
                 
-                let output = AVCaptureMetadataOutput()
                 if session.canAddOutput(output){
                     session.addOutput(output)
                 }
@@ -106,14 +101,18 @@ class QRCodeGeneratorVC: UIViewController {
                 previewLayer.session = session
                 
                 print("session start")
-                session.startRunning()
+                
+                DispatchQueue.global(qos: .background).async{
+                    self.session.startRunning()
+                }
+                
+                imgViewQRCode.image = generatorQRCode()
+                view.bringSubviewToFront(viewQRCode)
+                
             } catch {
                 print("error")
             }
         }
-        
-        
-        
     }
 }
 

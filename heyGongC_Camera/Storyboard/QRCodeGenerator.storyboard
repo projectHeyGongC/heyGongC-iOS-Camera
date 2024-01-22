@@ -76,6 +76,7 @@
                     </view>
                     <connections>
                         <outlet property="imgViewQRCode" destination="bcZ-di-VDM" id="n8W-iH-Y9E"/>
+                        <outlet property="viewQRCode" destination="oDc-dx-Lsj" id="fzv-eT-GA7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
