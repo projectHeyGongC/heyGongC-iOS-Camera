@@ -24,20 +24,20 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="편리하고 안전한 헤이공씨 앱 사용을 위해 다음과 같은 권한 허용이 필요합니다." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="diF-ue-1mD">
-                                <rect key="frame" x="37.5" y="157" width="339.5" height="13.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <rect key="frame" x="87" y="157" width="240" height="26.5"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jNc-E3-ab6" userLabel="lineView_1">
-                                <rect key="frame" x="14" y="222.5" width="386" height="1"/>
+                                <rect key="frame" x="14" y="235.5" width="386" height="1"/>
                                 <color key="backgroundColor" red="0.792156862745098" green="0.792156862745098" blue="0.792156862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="obb-Od-dac"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="M74-nd-sPN">
-                                <rect key="frame" x="31" y="250.5" width="221" height="40"/>
+                                <rect key="frame" x="31" y="263.5" width="221" height="40"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h09-s5-aZG">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -83,14 +83,14 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VlP-Ym-cDh" userLabel="lineView_2">
-                                <rect key="frame" x="14" y="317.5" width="386" height="1"/>
+                                <rect key="frame" x="14" y="330.5" width="386" height="1"/>
                                 <color key="backgroundColor" red="0.79215686269999996" green="0.79215686269999996" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="mjq-UZ-zqZ"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="dP6-rb-B9J">
-                                <rect key="frame" x="31" y="345.5" width="221" height="40"/>
+                                <rect key="frame" x="31" y="358.5" width="221" height="40"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fl8-6Z-wdw">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -119,7 +119,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="NiA-Kf-G9G">
                                         <rect key="frame" x="65" y="0.0" width="156" height="40"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="카메라 필수" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KWX-3V-Ikr">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="마이크 필수" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KWX-3V-Ikr">
                                                 <rect key="frame" x="0.0" y="0.0" width="156" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                 <nil key="textColor"/>
@@ -136,20 +136,20 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eRT-QD-J5g" userLabel="lineView_3">
-                                <rect key="frame" x="14" y="412.5" width="386" height="1"/>
+                                <rect key="frame" x="14" y="425.5" width="386" height="1"/>
                                 <color key="backgroundColor" red="0.79215686269999996" green="0.79215686269999996" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="CXn-Ph-Po4"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*접근 권한 변경 방법: 설정 &gt; 헤이공씨 &gt; 권한 ON/OFF" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bU9-L6-hCK">
-                                <rect key="frame" x="14" y="423.5" width="386" height="13.5"/>
+                                <rect key="frame" x="14" y="436.5" width="386" height="13.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*접근 권한을 허용하지 않는 경우 서비스 이용이 어려울 수 있습니다" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zU1-un-uED">
-                                <rect key="frame" x="14" y="444" width="386" height="13.5"/>
+                                <rect key="frame" x="14" y="457" width="386" height="13.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -176,6 +176,7 @@
                         <constraints>
                             <constraint firstItem="8ps-QT-faB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="74" id="1Z0-od-Lct"/>
                             <constraint firstItem="VlP-Ym-cDh" firstAttribute="top" secondItem="M74-nd-sPN" secondAttribute="bottom" constant="27" id="219-Rq-S3L"/>
+                            <constraint firstItem="diF-ue-1mD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="87" id="3E3-yL-Gnt"/>
                             <constraint firstItem="zU1-un-uED" firstAttribute="top" secondItem="bU9-L6-hCK" secondAttribute="bottom" constant="7" id="41v-5c-Qma"/>
                             <constraint firstItem="diF-ue-1mD" firstAttribute="top" secondItem="8ps-QT-faB" secondAttribute="bottom" constant="11" id="5Gu-4b-aS4"/>
                             <constraint firstItem="pMX-gU-JFB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="36" id="Fk0-Pq-siR"/>
@@ -188,6 +189,7 @@
                             <constraint firstItem="jNc-E3-ab6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PKw-Uc-Vt2"/>
                             <constraint firstItem="eRT-QD-J5g" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="RbZ-cV-da5"/>
                             <constraint firstItem="bU9-L6-hCK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="14" id="TxL-Mj-oP3"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="diF-ue-1mD" secondAttribute="trailing" constant="87" id="Wg7-7h-BlK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pMX-gU-JFB" secondAttribute="trailing" constant="36" id="Wwp-uM-Vd0"/>
                             <constraint firstItem="bU9-L6-hCK" firstAttribute="top" secondItem="eRT-QD-J5g" secondAttribute="bottom" constant="10" id="a37-hn-Pc9"/>
                             <constraint firstItem="VlP-Ym-cDh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="chm-Lw-d2d"/>
@@ -207,6 +209,8 @@
                     </view>
                     <connections>
                         <outlet property="btnAccept" destination="pMX-gU-JFB" id="cwi-SA-FiO"/>
+                        <outlet property="lblCameraRequired" destination="F4f-Gi-kwq" id="hyA-hn-yjc"/>
+                        <outlet property="lblMicRequired" destination="KWX-3V-Ikr" id="NMR-As-wTR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
