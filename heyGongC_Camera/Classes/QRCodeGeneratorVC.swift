@@ -29,8 +29,8 @@ class QRCodeGeneratorVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.lockOrientation(.landscape)
         view.layer.addSublayer(previewLayer)
-        
         checkCameraPermission()
     }
     
@@ -41,7 +41,6 @@ class QRCodeGeneratorVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //self.lockOrientation(.landscape)
     }
     
     private func generatorQRCode() -> UIImage?{
@@ -99,6 +98,7 @@ class QRCodeGeneratorVC: UIViewController {
                 
                 previewLayer.videoGravity = .resizeAspectFill
                 previewLayer.session = session
+                previewLayer.connection?.videoOrientation = .landscapeRight
                 
                 print("session start")
                 
