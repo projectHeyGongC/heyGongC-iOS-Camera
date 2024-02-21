@@ -18,15 +18,18 @@ class QRCodeGeneratorVC: UIViewController {
     @IBOutlet weak var viewQRCode: UIView!
     @IBOutlet weak var imgViewQRCode: UIImageView!
     
-    var viewModel = QRCodeGeneratorVM()
+// MARK: - properties
+    private var viewModel = QRCodeGeneratorVM()
     
-    let session = AVCaptureSession()
-    let output: AVCaptureOutput = AVCapturePhotoOutput()
-    let previewLayer = AVCaptureVideoPreviewLayer()
+    private let session = AVCaptureSession()
+    private let output: AVCaptureOutput = AVCapturePhotoOutput()
+    private let previewLayer = AVCaptureVideoPreviewLayer()
     
-    let context = CIContext()
-    let filter = CIFilter.qrCodeGenerator()
+    private let context = CIContext()
+    private let filter = CIFilter.qrCodeGenerator()
     
+    
+// MARK: - methods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.lockOrientation(.landscape)
@@ -39,16 +42,21 @@ class QRCodeGeneratorVC: UIViewController {
         previewLayer.frame = view.bounds
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        DispatchQueue.global(qos: .background).async{
+            self.session.startRunning()
+        }
     }
     
-    private func generatorQRCode() -> UIImage?{
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.session.stopRunning()
+    }
+    
+    private func generatorQRCodeImage() -> UIImage?{
         
-        //QR코드 기기 UUID + 키체인 조합으로 generator 필요.
-        let qrData = "some data"
-        filter.setValue(qrData.data(using: .utf8), forKey: "inputMessage")
-        
+        filter.setValue(viewModel.generateQRCodeData(), forKey: "inputMessage")
         guard let qrCodeImage = filter.outputImage else { return nil }
         
         let transform = CGAffineTransform(scaleX: 5, y: 5)
@@ -60,6 +68,7 @@ class QRCodeGeneratorVC: UIViewController {
         
     }
     
+// MARK: - Camera Setting Methods
     private func checkCameraPermission(){
         switch AVCaptureDevice.authorizationStatus(for: .video){
         case.notDetermined:
@@ -106,7 +115,7 @@ class QRCodeGeneratorVC: UIViewController {
                     self.session.startRunning()
                 }
                 
-                imgViewQRCode.image = generatorQRCode()
+                imgViewQRCode.image = generatorQRCodeImage()
                 view.bringSubviewToFront(viewQRCode)
                 
             } catch {

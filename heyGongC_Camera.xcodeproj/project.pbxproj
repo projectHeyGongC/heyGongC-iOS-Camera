@@ -140,6 +140,7 @@
 		B8D035D22B5A5035001E7D2A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B8E6BB692B80845E00677F87 /* Network */,
 				B86F589F2B5A611100156BC9 /* UI */,
 				B86F589C2B5A60E200156BC9 /* Utils */,
 				B86F58942B5A5B7C00156BC9 /* Extensions */,
@@ -165,6 +166,13 @@
 				B87DE66D2B5A69700090E79A /* QRCodeGenerator.storyboard */,
 			);
 			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		B8E6BB692B80845E00677F87 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Network;
 			sourceTree = "<group>";
 		};
 		E32FC90C72661E0CF64191CA /* Pods */ = {
@@ -455,6 +463,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CHX2C8U843;
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -486,6 +495,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CHX2C8U843;
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;

@@ -34,8 +34,10 @@ class PermissionSettingVC: UIViewController {
         {$0 && $1}
             .subscribe { [weak self] isEnabled in
                 guard let self = self else { return }
-                btnAccept.backgroundColor = isEnabled ? GCColor.C_FFC000 : GCColor.C_CACACA
-                btnAccept.isEnabled = isEnabled
+                DispatchQueue.main.async {
+                    self.btnAccept.backgroundColor = isEnabled ? GCColor.C_FFC000 : GCColor.C_CACACA
+                    self.btnAccept.isEnabled = isEnabled
+                }
             }
             .disposed(by: disposebag)
         
@@ -69,7 +71,4 @@ class PermissionSettingVC: UIViewController {
             UIApplication.shared.open(url)
         }
     }
-    
-    
 }
-
