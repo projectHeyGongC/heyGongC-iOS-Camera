@@ -35,6 +35,7 @@ class QRCodeGeneratorVC: UIViewController {
         self.lockOrientation(.landscape)
         view.layer.addSublayer(previewLayer)
         checkCameraPermission()
+        bindAction()
     }
     
     override func viewDidLayoutSubviews() {
@@ -52,6 +53,14 @@ class QRCodeGeneratorVC: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.session.stopRunning()
+    }
+    
+    private func bindAction(){
+        viewModel.successAddDevice
+            .bind {
+                self.viewQRCode.isHidden = $0
+            }
+            .disposed(by: viewModel.bag)
     }
     
     private func generatorQRCodeImage() -> UIImage?{
