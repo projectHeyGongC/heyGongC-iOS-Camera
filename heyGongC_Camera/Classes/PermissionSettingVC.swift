@@ -19,7 +19,6 @@ class PermissionSettingVC: UIViewController {
     @IBOutlet weak var viewPermission: UIView!
     
     private let viewModel = PermissionSettingVM()
-    private var disposebag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,17 +38,25 @@ class PermissionSettingVC: UIViewController {
                     self.btnAccept.isEnabled = isEnabled
                 }
             }
-            .disposed(by: disposebag)
+            .disposed(by: viewModel.bag)
         
         btnAccept.rx.tap
             .bind{
-                let storyboard = UIStoryboard.init(name: "QRCodeGenerator", bundle: nil)
-                guard let vc = storyboard.instantiateViewController(withIdentifier: "QRCodeGenerator")as? QRCodeGeneratorVC else {return}
-                
-                vc.modalPresentationStyle = .fullScreen
-                self.present(vc, animated: true, completion: nil)
+                self.viewModel.isValidAccessToken()
             }
-            .disposed(by: disposebag)
+            .disposed(by: viewModel.bag)
+        
+        viewModel.isValidAccessTokenRelay
+            .bind{
+                if $0 {
+                    let storyboard = UIStoryboard.init(name: "QRCodeGenerator", bundle: nil)
+                    guard let vc = storyboard.instantiateViewController(withIdentifier: "QRCodeGenerator")as? QRCodeGeneratorVC else {return}
+                    
+                    vc.modalPresentationStyle = .fullScreen
+                    self.present(vc, animated: true, completion: nil)
+                }
+            }
+            .disposed(by: viewModel.bag)
     }
     
     private func setAttributeString(label: UILabel){

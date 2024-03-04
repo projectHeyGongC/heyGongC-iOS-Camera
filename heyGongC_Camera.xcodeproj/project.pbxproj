@@ -14,6 +14,11 @@
 		B8322BB32B5A207D0063C45D /* PermissionSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8322BB12B5A207D0063C45D /* PermissionSetting.storyboard */; };
 		B8322BB52B5A207F0063C45D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8322BB42B5A207F0063C45D /* Assets.xcassets */; };
 		B8322BB82B5A207F0063C45D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8322BB62B5A207F0063C45D /* LaunchScreen.storyboard */; };
+		B85F6CC92B958D88006E08D0 /* MoyaLoggingPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85F6CC82B958D88006E08D0 /* MoyaLoggingPlugin.swift */; };
+		B85F6CCB2B958D9A006E08D0 /* Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85F6CCA2B958D9A006E08D0 /* Localized.swift */; };
+		B85F6CCD2B958DA2006E08D0 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85F6CCC2B958DA2006E08D0 /* APIService.swift */; };
+		B85F6CCF2B958DC3006E08D0 /* GCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85F6CCE2B958DC3006E08D0 /* GCError.swift */; };
+		B85F6CD12B958DD7006E08D0 /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85F6CD02B958DD7006E08D0 /* DeviceModel.swift */; };
 		B86F58962B5A5BBD00156BC9 /* Design+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86F58952B5A5BBD00156BC9 /* Design+Ext.swift */; };
 		B86F589E2B5A60ED00156BC9 /* GCColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86F589D2B5A60ED00156BC9 /* GCColor.swift */; };
 		B87DE66E2B5A69700090E79A /* QRCodeGenerator.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B87DE66D2B5A69700090E79A /* QRCodeGenerator.storyboard */; };
@@ -35,6 +40,11 @@
 		B8322BB42B5A207F0063C45D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B8322BB72B5A207F0063C45D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B8322BB92B5A207F0063C45D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B85F6CC82B958D88006E08D0 /* MoyaLoggingPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoyaLoggingPlugin.swift; sourceTree = "<group>"; };
+		B85F6CCA2B958D9A006E08D0 /* Localized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localized.swift; sourceTree = "<group>"; };
+		B85F6CCC2B958DA2006E08D0 /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		B85F6CCE2B958DC3006E08D0 /* GCError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCError.swift; sourceTree = "<group>"; };
+		B85F6CD02B958DD7006E08D0 /* DeviceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
 		B86F58952B5A5BBD00156BC9 /* Design+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Design+Ext.swift"; sourceTree = "<group>"; };
 		B86F589D2B5A60ED00156BC9 /* GCColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCColor.swift; sourceTree = "<group>"; };
 		B87DE66D2B5A69700090E79A /* QRCodeGenerator.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = QRCodeGenerator.storyboard; sourceTree = "<group>"; };
@@ -69,6 +79,7 @@
 		B81521C12B91886E00C055A8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B85F6CD02B958DD7006E08D0 /* DeviceModel.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -163,6 +174,7 @@
 		B8D035D32B5A503C001E7D2A /* App */ = {
 			isa = PBXGroup;
 			children = (
+				B85F6CCA2B958D9A006E08D0 /* Localized.swift */,
 				B8322BAB2B5A207D0063C45D /* AppDelegate.swift */,
 				B8322BAD2B5A207D0063C45D /* SceneDelegate.swift */,
 			);
@@ -182,6 +194,9 @@
 		B8E6BB692B80845E00677F87 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				B85F6CCE2B958DC3006E08D0 /* GCError.swift */,
+				B85F6CCC2B958DA2006E08D0 /* APIService.swift */,
+				B85F6CC82B958D88006E08D0 /* MoyaLoggingPlugin.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -312,12 +327,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8322BB02B5A207D0063C45D /* PermissionSettingVC.swift in Sources */,
+				B85F6CCB2B958D9A006E08D0 /* Localized.swift in Sources */,
 				B8322BAC2B5A207D0063C45D /* AppDelegate.swift in Sources */,
 				B87DE6732B5A6BE30090E79A /* QRCodeGeneratorVM.swift in Sources */,
 				B8D035D92B5A5131001E7D2A /* PermissionSettingVM.swift in Sources */,
+				B85F6CC92B958D88006E08D0 /* MoyaLoggingPlugin.swift in Sources */,
 				B86F589E2B5A60ED00156BC9 /* GCColor.swift in Sources */,
 				B8322BAE2B5A207D0063C45D /* SceneDelegate.swift in Sources */,
+				B85F6CD12B958DD7006E08D0 /* DeviceModel.swift in Sources */,
+				B85F6CCF2B958DC3006E08D0 /* GCError.swift in Sources */,
 				B87DE6712B5A6BD80090E79A /* QRCodeGeneratorVC.swift in Sources */,
+				B85F6CCD2B958DA2006E08D0 /* APIService.swift in Sources */,
 				B8C818C72B918A32000EF101 /* Util.swift in Sources */,
 				B86F58962B5A5BBD00156BC9 /* Design+Ext.swift in Sources */,
 				B8DD20102B5E5BA500E04A24 /* UIViewController+Ext.swift in Sources */,
