@@ -15,13 +15,12 @@ class QRCodeGeneratorVM {
     
     public func generateQRCodeData()-> Data? {
         let device = UIDevice.current
-        let uuid = device.identifierForVendor!.uuidString
         let selName = "_\("deviceInfo")ForKey:"
         let selector = NSSelectorFromString(selName)
         
         if device.responds(to: selector){
             let modelName = String(describing: device.perform(selector, with: "marketing-name").takeRetainedValue())
-            qrData = uuid + " \(modelName)"
+            qrData = Util.getUUID() + " \(modelName)"
             return qrData?.data(using: .utf8)
         }
             return nil

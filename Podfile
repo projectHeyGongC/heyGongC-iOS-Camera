@@ -23,6 +23,7 @@ def common_pods
   pod 'Toast-Swift', '~> 5.0.1'
   pod 'SnapKit', '~> 5.6.0'
   pod 'Moya', '~> 15.0'
+  pod 'Moya/RxSwift'
   
   # ReactiveX
   pod 'RxSwift'
@@ -36,6 +37,7 @@ def common_pods
   pod 'SwiftyUserDefaults', '~> 5.0'
   pod 'lottie-ios', '~> 3.3.0'
   pod 'Action'
+  pod 'TAKUUID'
   
 end
 
