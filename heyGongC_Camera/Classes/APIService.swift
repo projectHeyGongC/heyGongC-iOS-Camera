@@ -15,7 +15,7 @@ enum APIService {
 
 extension APIService: TargetType {
     var baseURL: URL {
-        return URL(string: "http://13.125.159.97/v1/")!
+        return URL(string: "http://15.165.133.184/v1")!
     }
     
     var path: String {
@@ -35,15 +35,18 @@ extension APIService: TargetType {
     var task: Moya.Task {
         switch self {
         case .token:
-            return .requestJSONEncodable(DeviceParam.AccessTokenRequest())
+            return .requestParameters(parameters: ["deviceId" : Util.getUUID()], encoding: URLEncoding.queryString)
         }
     }
     
     var headers: [String : String]? {
-        return [
-            "accept": "application/json",
-            "Content-Type": "application/json"
-        ]
+        switch self {
+        case .token:
+            return [
+                "Content-Type": "text/plain",
+                "Accept" : "text/plain"
+            ]
+        }
     }
 }
 
@@ -59,30 +62,49 @@ class DeviceAPI {
         case error(GCError)
     }
     
-    public func networking(completion: @escaping (NetworkResult<Any>) -> Void){
-        deviceProvider.rx.request(.token)
-            .subscribe { result in
+    public func networking<T:Codable>(type: T.Type = String.self) -> Single<NetworkResult<T>> {
+        return Single<NetworkResult<T>>.create { single in
+            self.deviceProvider.request(.token) { result in
                 switch result {
                 case .success(let response):
-                    switch response.statusCode {
-                    case 200:
-                        completion(.success(try? response.map(String.self)))
-                    case 400:
-                        completion(.error(.badRequest))
-                    case 401:
-                        completion(.error(.unauthorized))
-                    case 403:
-                        completion(.error(.forbidden))
-                    case 500:
-                        completion(.error(.internalServerError))
-                    default:
-                        print("❗️❗️❗️❗️ networkFail")
-                        completion(.error(.notFoundCode))
-                    }
+                    print("response: \(response)")
+                    single(.success(self.judgeStatus(response: response, type: type)))
                 case .failure(let error):
-                    print("\(error)")
+                    single(.failure(error))
+                    return
                 }
             }
-            .disposed(by: disposeBag)
+            return Disposables.create()
+        }
+        
+    }
+    
+    private func judgeStatus<T: Codable>(response: Response, type: T.Type = String.self) -> NetworkResult<T> {
+        let decoder = JSONDecoder()
+        switch response.statusCode {
+        case 200:
+            if let contentType = response.response?.allHeaderFields["Content-Type"] as? String {
+                if contentType.contains("text/plain") {
+                    guard let textData = String(data: response.data, encoding: .utf8) as? T else { return .success(nil) }
+                    return .success(textData)
+                } else if contentType.contains("application/json") {
+                    guard let decodedData = try? decoder.decode(T.self, from: response.data) else { return .error(.errorJson) }
+                    return .success(decodedData)
+                }
+                    return .success(nil)
+            }
+            return .error(.errorJson)
+        case 400:
+            return .error(.badRequest)
+        case 401:
+            return .error(.unauthorized)
+        case 403:
+            return .error(.forbidden)
+        case 500:
+            return .error(.internalServerError)
+        default:
+            print("❗️❗️❗️❗️ networkFail")
+            return .error(.notFoundCode)
+        }
     }
 }

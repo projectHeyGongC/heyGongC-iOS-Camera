@@ -42,19 +42,11 @@ class PermissionSettingVC: UIViewController {
         
         btnAccept.rx.tap
             .bind{
-                self.viewModel.isValidAccessToken()
-            }
-            .disposed(by: viewModel.bag)
-        
-        viewModel.isValidAccessTokenRelay
-            .bind{
-                if $0 {
-                    let storyboard = UIStoryboard.init(name: "QRCodeGenerator", bundle: nil)
-                    guard let vc = storyboard.instantiateViewController(withIdentifier: "QRCodeGenerator")as? QRCodeGeneratorVC else {return}
-                    
-                    vc.modalPresentationStyle = .fullScreen
-                    self.present(vc, animated: true, completion: nil)
-                }
+                let storyboard = UIStoryboard.init(name: "QRCodeGenerator", bundle: nil)
+                guard let vc = storyboard.instantiateViewController(withIdentifier: "QRCodeGenerator")as? QRCodeGeneratorVC else {return}
+                
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true, completion: nil)
             }
             .disposed(by: viewModel.bag)
     }

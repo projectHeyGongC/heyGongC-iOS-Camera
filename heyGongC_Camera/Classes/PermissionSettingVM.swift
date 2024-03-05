@@ -16,7 +16,7 @@ class PermissionSettingVM {
     var errorHandler = BehaviorRelay<GCError?>(value: nil)
     let cameraPermissionRelay = BehaviorRelay<Bool>(value: false)
     let audioPermissionRelay = BehaviorRelay<Bool>(value: false)
-    let isValidAccessTokenRelay = BehaviorRelay<Bool>(value: false)
+    
     init(){
         checkCameraPermission()
         checkAudioPermission()
@@ -53,17 +53,4 @@ class PermissionSettingVM {
             break
         }
     }
-    
-    func isValidAccessToken(){
-        DeviceAPI.shared.networking { result in
-            switch result {
-            case .success(let t):
-                print("AccessToken: \(t)")
-                self.isValidAccessTokenRelay.accept(true)
-            case .error(let error):
-                self.errorHandler.accept(error)
-            }
-        }
-    }
-    
 }
