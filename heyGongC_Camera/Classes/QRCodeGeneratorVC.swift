@@ -18,24 +18,32 @@ class QRCodeGeneratorVC: UIViewController {
     @IBOutlet weak var viewQRCode: UIView!
     @IBOutlet weak var imgViewQRCode: UIImageView!
     
-// MARK: - properties
+    // MARK: - properties
     private var viewModel = QRCodeGeneratorVM()
     
     private let session = AVCaptureSession()
-    private let output: AVCaptureOutput = AVCapturePhotoOutput()
+    private let output: AVCaptureOutput = AVCaptureVideoDataOutput()
     private let previewLayer = AVCaptureVideoPreviewLayer()
+    
+    // 소리감지 프로퍼티
+    private var recorder: AVAudioRecorder!
     
     private let context = CIContext()
     private let filter = CIFilter.qrCodeGenerator()
     
     
-// MARK: - methods
+    // MARK: - methods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.lockOrientation(.landscape)
         view.layer.addSublayer(previewLayer)
         checkCameraPermission()
         bindAction()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3){ [weak self] in
+            guard let self else { return }
+            viewModel.successAddDevice.accept(true)
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -59,7 +67,19 @@ class QRCodeGeneratorVC: UIViewController {
         viewModel.successAddDevice
             .bind {
                 self.viewQRCode.isHidden = $0
+                
+                //오디오 감지 시작? 만약에 오디오 권한이 꺼져있다면 recorder도 비활성화 시켜야함?
+                self.viewModel.recorder.startRecording()
             }
+            .disposed(by: viewModel.bag)
+        
+        viewModel.soundDataRelay
+            .subscribe(onNext: { soundValues in
+                    // soundValues 배열에 있는 값 중 400을 초과하는 값이 있는지 확인하고 출력
+                    if soundValues.contains(where: { $0 > 400 }) {
+                        print("소리 감지")
+                    }
+                })
             .disposed(by: viewModel.bag)
     }
     
@@ -77,7 +97,7 @@ class QRCodeGeneratorVC: UIViewController {
         
     }
     
-// MARK: - Camera Setting Methods
+    // MARK: - Camera Setting Methods
     private func checkCameraPermission(){
         switch AVCaptureDevice.authorizationStatus(for: .video){
         case.notDetermined:

@@ -14,10 +14,13 @@
 		B8322BB32B5A207D0063C45D /* PermissionSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8322BB12B5A207D0063C45D /* PermissionSetting.storyboard */; };
 		B8322BB52B5A207F0063C45D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8322BB42B5A207F0063C45D /* Assets.xcassets */; };
 		B8322BB82B5A207F0063C45D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8322BB62B5A207F0063C45D /* LaunchScreen.storyboard */; };
+		B844E2812B9EF017006BB780 /* PCMDataProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B844E2802B9EF017006BB780 /* PCMDataProcessor.swift */; };
+		B844E2832B9EF023006BB780 /* SoundRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B844E2822B9EF023006BB780 /* SoundRecorder.swift */; };
 		B85F6CC92B958D88006E08D0 /* MoyaLoggingPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85F6CC82B958D88006E08D0 /* MoyaLoggingPlugin.swift */; };
 		B85F6CCB2B958D9A006E08D0 /* Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85F6CCA2B958D9A006E08D0 /* Localized.swift */; };
 		B85F6CCD2B958DA2006E08D0 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85F6CCC2B958DA2006E08D0 /* APIService.swift */; };
 		B85F6CCF2B958DC3006E08D0 /* GCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85F6CCE2B958DC3006E08D0 /* GCError.swift */; };
+		B85FE1DA2B9C657600DCA166 /* SoundAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85FE1D92B9C657600DCA166 /* SoundAnalyzer.swift */; };
 		B86F58962B5A5BBD00156BC9 /* Design+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86F58952B5A5BBD00156BC9 /* Design+Ext.swift */; };
 		B86F589E2B5A60ED00156BC9 /* GCColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86F589D2B5A60ED00156BC9 /* GCColor.swift */; };
 		B87DE66E2B5A69700090E79A /* QRCodeGenerator.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B87DE66D2B5A69700090E79A /* QRCodeGenerator.storyboard */; };
@@ -43,10 +46,13 @@
 		B8322BB42B5A207F0063C45D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B8322BB72B5A207F0063C45D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B8322BB92B5A207F0063C45D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B844E2802B9EF017006BB780 /* PCMDataProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PCMDataProcessor.swift; sourceTree = "<group>"; };
+		B844E2822B9EF023006BB780 /* SoundRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundRecorder.swift; sourceTree = "<group>"; };
 		B85F6CC82B958D88006E08D0 /* MoyaLoggingPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoyaLoggingPlugin.swift; sourceTree = "<group>"; };
 		B85F6CCA2B958D9A006E08D0 /* Localized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localized.swift; sourceTree = "<group>"; };
 		B85F6CCC2B958DA2006E08D0 /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		B85F6CCE2B958DC3006E08D0 /* GCError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCError.swift; sourceTree = "<group>"; };
+		B85FE1D92B9C657600DCA166 /* SoundAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundAnalyzer.swift; sourceTree = "<group>"; };
 		B86F58952B5A5BBD00156BC9 /* Design+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Design+Ext.swift"; sourceTree = "<group>"; };
 		B86F589D2B5A60ED00156BC9 /* GCColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCColor.swift; sourceTree = "<group>"; };
 		B87DE66D2B5A69700090E79A /* QRCodeGenerator.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = QRCodeGenerator.storyboard; sourceTree = "<group>"; };
@@ -131,8 +137,11 @@
 		B86F589C2B5A60E200156BC9 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B844E2802B9EF017006BB780 /* PCMDataProcessor.swift */,
 				B86F589D2B5A60ED00156BC9 /* GCColor.swift */,
+				B844E2822B9EF023006BB780 /* SoundRecorder.swift */,
 				B8C818C62B918A32000EF101 /* Util.swift */,
+				B85FE1D92B9C657600DCA166 /* SoundAnalyzer.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -345,10 +354,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8322BB02B5A207D0063C45D /* PermissionSettingVC.swift in Sources */,
+				B844E2832B9EF023006BB780 /* SoundRecorder.swift in Sources */,
 				B8C62D6C2B96E1CD0022FD5B /* SplashView.swift in Sources */,
 				B85F6CCB2B958D9A006E08D0 /* Localized.swift in Sources */,
 				B8322BAC2B5A207D0063C45D /* AppDelegate.swift in Sources */,
 				B87DE6732B5A6BE30090E79A /* QRCodeGeneratorVM.swift in Sources */,
+				B844E2812B9EF017006BB780 /* PCMDataProcessor.swift in Sources */,
 				B8D035D92B5A5131001E7D2A /* PermissionSettingVM.swift in Sources */,
 				B85F6CC92B958D88006E08D0 /* MoyaLoggingPlugin.swift in Sources */,
 				B86F589E2B5A60ED00156BC9 /* GCColor.swift in Sources */,
@@ -359,6 +370,7 @@
 				B85F6CCD2B958DA2006E08D0 /* APIService.swift in Sources */,
 				B8C818C72B918A32000EF101 /* Util.swift in Sources */,
 				B8C62D722B97072E0022FD5B /* DefaultsKeys+Ext.swift in Sources */,
+				B85FE1DA2B9C657600DCA166 /* SoundAnalyzer.swift in Sources */,
 				B86F58962B5A5BBD00156BC9 /* Design+Ext.swift in Sources */,
 				B8DD20102B5E5BA500E04A24 /* UIViewController+Ext.swift in Sources */,
 			);
