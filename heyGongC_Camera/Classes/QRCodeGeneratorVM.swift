@@ -12,55 +12,74 @@ import UIKit
 
 class QRCodeGeneratorVM {
     
-    //QR코드 기기 UUID
+    //QR코드형식 - ("UUID Model명")
     private var qrData: String?
-    var successAddDevice = BehaviorRelay<Bool>(value: false)
-    var soundDataRelay = PublishRelay<[Double]>()
-    var bag = DisposeBag()
-    var recorder: SoundRecorder = SoundRecorder()
-    var isRecording: Bool = false
-    var soundData: [Double] = []
-    var timer: Timer?
+    private var timer: Timer?
+    private var soundData: [Double] = []
+    private var recorder: SoundAnalyzer = SoundAnalyzer()
     
-    func startDetecting() {
-        isRecording = true
-        // 여기에 녹음 시작 관련 로직 추가
-        recorder.startRecording()
-        
-        // 예제에서는 단순화를 위해 Timer를 사용하여 임의의 사운드 데이터를 생성
-        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
-            if self.isRecording {
-                self.soundData.append(Double.random(in: 0..<500))
-                self.soundDataRelay.accept(self.soundData)
+    var bag = DisposeBag()
+    
+    var successAddDevice = PublishRelay<Bool>()
+    var soundDataRelay = PublishRelay<Double>()
+    var recordingSubject = PublishSubject<Bool>()
+    
+    init(){
+        recorder.onRecordingProcessed = { averageTopTenPercent in
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+                print("Processed Value: \(averageTopTenPercent)") // Diagnostic log
+                soundDataRelay.accept(averageTopTenPercent)
             }
+        }
+        
+        bind()
+    }
+    
+    private func bind(){
+        recordingSubject
+            .subscribe{ [weak self] in
+                guard let self else { return }
+                if $0 {
+                    startRecordingCycle()
+                } else {
+                    stopRecordingCycle()
+                }
+            }
+            .disposed(by: bag)
+        
+        //큰 소리만 소리 데이터에 추가
+        soundDataRelay
+            .filter{ $0 > 0.003 }
+            .subscribe{ [weak self] sound in
+                guard let self else { return }
+                
+                print("🔊 큰 소리 감지: \(String(format: "%.2f", sound))")
+                
+                soundData.append(sound)
+                
+            }.disposed(by: bag)
+    }
+    
+    private func startRecordingCycle() {
+        startRecording()
+        timer = Timer.scheduledTimer(withTimeInterval: 6, repeats: true) { [weak self] _ in
+            self?.startRecording()
         }
     }
     
-    func stopDetecting() {
-        isRecording = false
-        recorder.stopRecording()
-        // 녹음 중지 관련 로직 추가
+    private func startRecording() {
+        recorder.startRecording()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            self.recorder.stopRecording()
+        }
     }
     
-//    public func setTimer(){
-//        timer = Timer(timeInterval: 5, repeats: true){ [weak self] _ in
-//            guard let self else { return }
-//            recorder.startRecording()
-//        }
-//        
-//        guard let timer = timer else { return }
-//        RunLoop.current.add(timer, forMode: .default)
-//        
-//        timer.fire()
-//        print("timer fire")
-//        
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 1){ [weak self] in
-//            guard let self else { return }
-//            
-//            recorder.stopRecording()
-//            timer.invalidate()
-//        }
-//    }
+    private func stopRecordingCycle() {
+        timer?.invalidate()
+        timer = nil
+        recorder.stopRecording()
+    }
     
     public func generateQRCodeData()-> Data? {
         let device = UIDevice.current
@@ -72,6 +91,7 @@ class QRCodeGeneratorVM {
             qrData = Util.getUUID() + " \(modelName)"
             return qrData?.data(using: .utf8)
         }
-            return nil
+        return nil
     }
+    
 }

@@ -15,7 +15,6 @@
 		B8322BB52B5A207F0063C45D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8322BB42B5A207F0063C45D /* Assets.xcassets */; };
 		B8322BB82B5A207F0063C45D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8322BB62B5A207F0063C45D /* LaunchScreen.storyboard */; };
 		B844E2812B9EF017006BB780 /* PCMDataProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B844E2802B9EF017006BB780 /* PCMDataProcessor.swift */; };
-		B844E2832B9EF023006BB780 /* SoundRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B844E2822B9EF023006BB780 /* SoundRecorder.swift */; };
 		B85F6CC92B958D88006E08D0 /* MoyaLoggingPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85F6CC82B958D88006E08D0 /* MoyaLoggingPlugin.swift */; };
 		B85F6CCB2B958D9A006E08D0 /* Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85F6CCA2B958D9A006E08D0 /* Localized.swift */; };
 		B85F6CCD2B958DA2006E08D0 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85F6CCC2B958DA2006E08D0 /* APIService.swift */; };
@@ -47,7 +46,6 @@
 		B8322BB72B5A207F0063C45D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B8322BB92B5A207F0063C45D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B844E2802B9EF017006BB780 /* PCMDataProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PCMDataProcessor.swift; sourceTree = "<group>"; };
-		B844E2822B9EF023006BB780 /* SoundRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundRecorder.swift; sourceTree = "<group>"; };
 		B85F6CC82B958D88006E08D0 /* MoyaLoggingPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoyaLoggingPlugin.swift; sourceTree = "<group>"; };
 		B85F6CCA2B958D9A006E08D0 /* Localized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localized.swift; sourceTree = "<group>"; };
 		B85F6CCC2B958DA2006E08D0 /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
@@ -139,7 +137,6 @@
 			children = (
 				B844E2802B9EF017006BB780 /* PCMDataProcessor.swift */,
 				B86F589D2B5A60ED00156BC9 /* GCColor.swift */,
-				B844E2822B9EF023006BB780 /* SoundRecorder.swift */,
 				B8C818C62B918A32000EF101 /* Util.swift */,
 				B85FE1D92B9C657600DCA166 /* SoundAnalyzer.swift */,
 			);
@@ -354,7 +351,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8322BB02B5A207D0063C45D /* PermissionSettingVC.swift in Sources */,
-				B844E2832B9EF023006BB780 /* SoundRecorder.swift in Sources */,
 				B8C62D6C2B96E1CD0022FD5B /* SplashView.swift in Sources */,
 				B85F6CCB2B958D9A006E08D0 /* Localized.swift in Sources */,
 				B8322BAC2B5A207D0063C45D /* AppDelegate.swift in Sources */,

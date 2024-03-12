@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import SnapKit
 import RxSwift
+import RxCocoa
 import SwiftyUserDefaults
 import AVFoundation
 import CoreImage.CIFilterBuiltins
@@ -31,6 +32,7 @@ class QRCodeGeneratorVC: UIViewController {
     private let context = CIContext()
     private let filter = CIFilter.qrCodeGenerator()
     
+    private var isTappedViewQRCode: Bool = false
     
     // MARK: - methods
     override func viewDidLoad() {
@@ -40,10 +42,10 @@ class QRCodeGeneratorVC: UIViewController {
         checkCameraPermission()
         bindAction()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3){ [weak self] in
-            guard let self else { return }
-            viewModel.successAddDevice.accept(true)
-        }
+        let tapGesture = UITapGestureRecognizer()
+        viewQRCode.addGestureRecognizer(tapGesture)
+        tapGesture.addTarget(self, action: #selector(didTapView))
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -66,21 +68,16 @@ class QRCodeGeneratorVC: UIViewController {
     private func bindAction(){
         viewModel.successAddDevice
             .bind {
-                self.viewQRCode.isHidden = $0
-                
-                //오디오 감지 시작? 만약에 오디오 권한이 꺼져있다면 recorder도 비활성화 시켜야함?
-                self.viewModel.recorder.startRecording()
+                //self.viewQRCode.isHidden = $0
+                self.viewModel.recordingSubject.onNext($0)
             }
             .disposed(by: viewModel.bag)
-        
-        viewModel.soundDataRelay
-            .subscribe(onNext: { soundValues in
-                    // soundValues 배열에 있는 값 중 400을 초과하는 값이 있는지 확인하고 출력
-                    if soundValues.contains(where: { $0 > 400 }) {
-                        print("소리 감지")
-                    }
-                })
-            .disposed(by: viewModel.bag)
+    }
+    
+    @objc func didTapView(){
+        isTappedViewQRCode.toggle()
+        print("isTappedViewQRCode:\(isTappedViewQRCode)")
+        viewModel.successAddDevice.accept(isTappedViewQRCode)
     }
     
     private func generatorQRCodeImage() -> UIImage?{
@@ -153,4 +150,3 @@ class QRCodeGeneratorVC: UIViewController {
         }
     }
 }
-

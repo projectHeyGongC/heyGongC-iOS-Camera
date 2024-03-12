@@ -8,31 +8,19 @@
 import Foundation
 import AVFoundation
 import RxSwift
+import RxRelay
 
 class SoundAnalyzer {
-    enum Status {
-        // 녹음 시작
-        case Recording
-        // 녹음 멈춤
-        case Paused
-        // 녹음 중지
-        case Stopped
-        // 분석?
-        case Analyzing
-    }
+
+    private let audioEngine = AVAudioEngine()
+    private var buffer: [Float] = []
+    private var recordingFormat: AVAudioFormat!
+    var onRecordingProcessed: ((Double) -> Void)?
     
-    var audioEngine: AVAudioEngine!
-    var audioInputNode: AVAudioInputNode!
-    
-    //아마 이 값은 모니터링에서 설정하는 소리 민감도에 따라 변경될 가능성이 있음.
-    let minDb: Float = -80
-    var status = Status.Stopped
-    var timer: Timer?
     private let bag = DisposeBag()
     
-    init(){
-        setAudioSession()
-        setAudioEngine()
+    init() {
+        setupAudioSession()
     }
     
     deinit {
@@ -40,116 +28,57 @@ class SoundAnalyzer {
         print("deinit Recorder")
     }
     
-    private func setAudioSession(){
-        let session = AVAudioSession.sharedInstance()
+    func setupAudioSession(){
+        guard let recordingFormat = AVAudioFormat(commonFormat: .pcmFormatFloat32, sampleRate: 48000, channels: 1, interleaved: false) else { return }
+        self.recordingFormat = recordingFormat
         
         do {
-            try session.setCategory(.record)
-            try session.setActive(true, options: .notifyOthersOnDeactivation)
+            let audioSession = AVAudioSession.sharedInstance()
+            try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
+            try audioSession.setActive(true)
         } catch {
-            print("error - setAudioSession")
+            print("Failed to set audio session category: \(error)")
+            return
         }
     }
     
-    private func setAudioEngine(){
-        audioEngine = AVAudioEngine()
+    func startRecording() {
         
-        audioInputNode = audioEngine.inputNode
-        let inputFormat = audioInputNode.outputFormat(forBus: 0)
+        let inputNode = audioEngine.inputNode
         
-        audioEngine.prepare()
-    }
-    
-    public func setAnalyzer(){
-        timer = Timer(timeInterval: 5, repeats: true){ [weak self] _ in
-            guard let self else { return }
-            startAudioEngine()
-        }
+        inputNode.removeTap(onBus: 0)
         
-        guard let timer = timer else { return }
-        RunLoop.current.add(timer, forMode: .default)
+        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { [weak self] (buffer, when) in
+            guard let self = self else { return }
         
-        timer.fire()
-        print("timer fire")
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1){ [weak self] in
-            guard let self else { return }
-            
-            stopRecording()
-            timer.invalidate()
-        }
-    }
-    
-    @objc private func startAudioEngine(){
-        // 입력 노드에서 오디오 데이터를 받기 위해 노드 설정
-        let format = audioInputNode.inputFormat(forBus: 0)
-        audioInputNode.installTap(onBus: 0, bufferSize: 1024, format: format) { (buffer, time) in
-            self.analyzeAudioBuffer(buffer)
+            // Convert the audio buffer to an array of Float values
+            let bufferPointer = UnsafeBufferPointer(start: buffer.floatChannelData![0], count: Int(buffer.frameLength))
+            self.buffer.append(contentsOf: Array(bufferPointer))
         }
         
         do {
+            print("startRecording")
             try audioEngine.start()
-            status = .Recording
-            print("audioEngine start")
-            
         } catch {
-            print("error - startRecording")
+            print("Could not start audio engine: \(error)")
+            return
         }
     }
-
-    private func stopRecording(){
+    
+    
+    public func stopRecording(){
         print("Recording Stopped")
         audioEngine.stop()
-        audioInputNode.removeTap(onBus: 0)
-        status = .Stopped
+        audioEngine.inputNode.removeTap(onBus: 0)
+        processRecordingData()
+        buffer.removeAll()
     }
     
-    private func analyzeAudioBuffer(_ buffer: AVAudioPCMBuffer) {
-        guard let floatData = buffer.floatChannelData else { return }
-        let channelDataValue = floatData.pointee
-        
-        let channelDataValueArray = stride(from: 0, through: Int(buffer.frameLength), by: buffer.stride)
-            .map{ channelDataValue[$0]}
-        
-        let rms = sqrt(channelDataValueArray.map{
-            return $0 * $0
+    private func processRecordingData() {
+        //let processor = PCMDataProcessor()
+        let topAvg = PCMDataProcessor.calculateAverageOfTopTenPercent(from: buffer)
+        DispatchQueue.main.async {
+            self.onRecordingProcessed?(topAvg)
         }
-            .reduce(0, +) / Float(buffer.frameLength))
-        
-        //RMS를 데시벨로 변환
-        let avgPower = 20 * log10(rms)
-        print("AveragePower: \(avgPower)")
-        
-        let meterLevel = self.scaledPower(power: avgPower)
-        if meterLevel >= 0.7 {
-            print("큰 소리 감지: \(meterLevel)")
-        }
-    }
-    
-    //여기서 들어가는 power은 averagePower이다.
-    private func scaledPower(power: Float) -> Float {
-        //iOS는 -160~0의 dBFS를 사용 -160은 무음에 가깝다. 0은 최대전력.
-        
-        //power이 유효값인지 확인
-        guard power.isFinite else {
-            return 0.0
-        }
-        
-        //<---- 코드 수정 필요
-        
-        //minDb는 다이나믹 레인지이다.
-        //다이나믹 레인지는 시스템 에서 신호가 가장 큰 경우의 신호 대 잡음비
-        if power < minDb {
-            //averagePower가 minDb보다 작은 경우
-            return 0.0
-        } else if power >= 1.0 {
-            //최대 전력에 도달하는 경우
-            return 1.0
-        } else {
-            //0.0과 1.0 사이의 스케일링된 값을 계산
-            return (abs(minDb) - abs(power)) / abs(minDb)
-        }
-        
-        //------>
     }
 }
