@@ -34,8 +34,8 @@ class SplashView: UIViewController {
             .subscribe { [weak self] in
                 guard let self else { return }
                 if $0 {
-                    let storyboard = UIStoryboard.init(name: "QRCodeGenerator", bundle: nil)
-                    guard let vc = storyboard.instantiateViewController(withIdentifier: "QRCodeGenerator")as? QRCodeGeneratorVC else {return}
+                    let storyboard = UIStoryboard.init(name: "Camera", bundle: nil)
+                    guard let vc = storyboard.instantiateViewController(withIdentifier: "Camera")as? CameraVC else {return}
                     
                     vc.modalPresentationStyle = .fullScreen
                     present(vc, animated: true, completion: nil)

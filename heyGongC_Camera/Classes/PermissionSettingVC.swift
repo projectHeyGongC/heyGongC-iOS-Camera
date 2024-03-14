@@ -42,8 +42,8 @@ class PermissionSettingVC: UIViewController {
         
         btnAccept.rx.tap
             .bind{
-                let storyboard = UIStoryboard.init(name: "QRCodeGenerator", bundle: nil)
-                guard let vc = storyboard.instantiateViewController(withIdentifier: "QRCodeGenerator")as? QRCodeGeneratorVC else {return}
+                let storyboard = UIStoryboard.init(name: "Camera", bundle: nil)
+                guard let vc = storyboard.instantiateViewController(withIdentifier: "Camera")as? CameraVC else {return}
                 
                 vc.modalPresentationStyle = .fullScreen
                 self.present(vc, animated: true, completion: nil)

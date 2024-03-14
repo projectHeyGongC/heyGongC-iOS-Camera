@@ -1,5 +1,5 @@
 //
-//  QRCodeGeneratorVC.swift
+//  Camera.swift
 //  heyGongC_Camera
 //
 //  Created by 장예지 on 1/19/24.
@@ -14,13 +14,13 @@ import SwiftyUserDefaults
 import AVFoundation
 import CoreImage.CIFilterBuiltins
 
-class QRCodeGeneratorVC: UIViewController {
+class CameraVC: UIViewController {
     
     @IBOutlet weak var viewQRCode: UIView!
     @IBOutlet weak var imgViewQRCode: UIImageView!
     
     // MARK: - properties
-    private var viewModel = QRCodeGeneratorVM()
+    private var viewModel = CameraVM()
     
     private let session = AVCaptureSession()
     private let output: AVCaptureOutput = AVCaptureVideoDataOutput()

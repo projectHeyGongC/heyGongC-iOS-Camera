@@ -1,5 +1,5 @@
 //
-//  QRCodeGeneratorVM.swift
+//  CameraVM.swift
 //  heyGongC_Camera
 //
 //  Created by 장예지 on 1/19/24.
@@ -10,7 +10,7 @@ import RxSwift
 import RxRelay
 import UIKit
 
-class QRCodeGeneratorVM {
+class CameraVM {
     
     //QR코드형식 - ("UUID Model명")
     private var qrData: String?
