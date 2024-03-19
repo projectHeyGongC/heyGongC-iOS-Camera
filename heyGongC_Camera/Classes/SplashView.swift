@@ -69,14 +69,6 @@ class SplashView: UIViewController {
         switch e {
         case .unauthorized:
             break
-            //            AuthInterceptor 추가로 test 필요
-            
-            //            self.showAlert(localized: .DLG_EXPIRED, confirm: { [weak self] in
-            //                print(Defaults.REFRESH_TOKEN)
-            //                App.shared.introType = .login
-            //                self?.navigationController?.backToIntro()
-            //            })
-            //
         default:
             print("🔋🔋🔋🔋 \(error?.localizedDescription ?? "")")
             e.showErrorMsg(target: self.view)

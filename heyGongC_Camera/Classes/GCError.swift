@@ -20,6 +20,8 @@ public enum GCError: Error {
     case notFoundCode
     case unKnown
     case errorJson
+    case errorEncoding
+    case errorDecoding
 }
 
 enum GCErrorCode: Int {
@@ -48,6 +50,10 @@ extension GCError {
             print("unKnown")
         case .errorJson:
             print("errorJson")
+        case .errorEncoding:
+            print("errorEncoding")
+        case .errorDecoding:
+            print("errorDecoding")
         }
     }
     

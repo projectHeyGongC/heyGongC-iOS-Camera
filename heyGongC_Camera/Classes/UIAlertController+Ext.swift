@@ -9,21 +9,30 @@ import Foundation
 import UIKit
 
 extension UIAlertController {
-    static func showAlertAction(vc: UIViewController? = UIApplication.shared.keyWindow?.visibleViewController, preferredStyle: UIAlertController.Style = .alert, title: String = "", message: String = "", completeTitle: String = "확인", _ completeHandler:(() -> Void)? = nil){
+    static func showAlertAction(vc: UIViewController? = UIApplication.shared.keyWindow?.visibleViewController, localized: Localized, confirm: (()->())? = nil, cancel: (()->())? = nil){
                 
                 guard let currentVc = vc else {
-                    completeHandler?()
                     return
                 }
                 
                 DispatchQueue.main.async {
-                    let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
+                    let alert = UIAlertController(title: localized.title, message: localized.txt, preferredStyle: .alert)
                     
-                    let completeAction = UIAlertAction(title: completeTitle, style: .default) { action in
-                        completeHandler?()
+                    if localized.confirmText != "" {
+                        let confirmAction = UIAlertAction(title: localized.confirmText, style: .default){ action in
+                            confirm?()
+                        }
+                        confirmAction.setValue(UIColor(red: 0/255, green: 104/255, blue: 119/255, alpha: 1), forKey: "titleTextColor")
+                        alert.addAction(confirmAction)
                     }
                     
-                    alert.addAction(completeAction)
+                    if localized.cancelText != "" {
+                        let cancelAction = UIAlertAction(title: localized.cancelText, style: .cancel){ action in
+                            cancel?()
+                        }
+                        cancelAction.setValue(UIColor(red: 0, green: 0, blue: 0, alpha: 0.5), forKey: "titleTextColor")
+                        alert.addAction(cancelAction)
+                    }
                     
                     currentVc.present(alert, animated: true, completion: nil)
                 }

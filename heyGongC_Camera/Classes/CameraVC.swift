@@ -13,6 +13,7 @@ import RxCocoa
 import SwiftyUserDefaults
 import CoreImage.CIFilterBuiltins
 import AVFoundation
+import Toast_Swift
 
 class CameraVC: UIViewController {
     
@@ -95,8 +96,10 @@ class CameraVC: UIViewController {
     
     
     private func showAlertForQRGenerationFailure() {
-        UIAlertController.showAlertAction(vc: self, title: "QR 생성 실패", message: "재생성이 필요합니다", completeTitle: "재생성") {
+        UIAlertController.showAlertAction(vc: self, localized: .DLG_REGENERATE_QRCODE) {
             self.viewModel.getQRImage()
+        } cancel: {
+            self.view.makeToast(Localized.ERROR_MSG.txt)
         }
     }
 }

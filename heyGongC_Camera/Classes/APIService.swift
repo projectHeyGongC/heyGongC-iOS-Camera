@@ -85,13 +85,13 @@ class DeviceAPI {
         case 200:
             if let contentType = response.response?.allHeaderFields["Content-Type"] as? String {
                 if contentType.contains("text/plain") {
-                    guard let textData = String(data: response.data, encoding: .utf8) as? T else { return .success(nil) }
+                    guard let textData = String(data: response.data, encoding: .utf8) as? T else { return .error(.errorEncoding) }
                     return .success(textData)
                 } else if contentType.contains("application/json") {
-                    guard let decodedData = try? decoder.decode(T.self, from: response.data) else { return .error(.errorJson) }
+                    guard let decodedData = try? decoder.decode(T.self, from: response.data) else { return .error(.errorDecoding) }
                     return .success(decodedData)
                 }
-                    return .success(nil)
+                    return .error(.errorJson)
             }
             return .error(.errorJson)
         case 400:
