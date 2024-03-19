@@ -35,7 +35,7 @@ extension APIService: TargetType {
     var task: Moya.Task {
         switch self {
         case .token:
-            return .requestParameters(parameters: ["deviceId" : Util.getUUID()], encoding: URLEncoding.queryString)
+            return .requestParameters(parameters: ["deviceId" : Util.shared.uuid], encoding: URLEncoding.queryString)
         }
     }
     

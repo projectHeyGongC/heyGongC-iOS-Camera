@@ -25,6 +25,8 @@
 		B87DE66E2B5A69700090E79A /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B87DE66D2B5A69700090E79A /* Camera.storyboard */; };
 		B87DE6712B5A6BD80090E79A /* CameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87DE6702B5A6BD80090E79A /* CameraVC.swift */; };
 		B87DE6732B5A6BE30090E79A /* CameraVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87DE6722B5A6BE30090E79A /* CameraVM.swift */; };
+		B88822FB2BA966CE003FAAA0 /* UIWindow+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88822FA2BA966CE003FAAA0 /* UIWindow+Ext.swift */; };
+		B88822FD2BA966E4003FAAA0 /* UIAlertController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88822FC2BA966E4003FAAA0 /* UIAlertController+Ext.swift */; };
 		B8C62D692B96E1A60022FD5B /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8C62D682B96E1A60022FD5B /* Splash.storyboard */; };
 		B8C62D6C2B96E1CD0022FD5B /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C62D6B2B96E1CD0022FD5B /* SplashView.swift */; };
 		B8C62D6E2B96E4E30022FD5B /* InitialSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C62D6D2B96E4E30022FD5B /* InitialSettingViewModel.swift */; };
@@ -32,6 +34,7 @@
 		B8C818C72B918A32000EF101 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C818C62B918A32000EF101 /* Util.swift */; };
 		B8D035D92B5A5131001E7D2A /* PermissionSettingVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D035D82B5A5131001E7D2A /* PermissionSettingVM.swift */; };
 		B8DD20102B5E5BA500E04A24 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DD200F2B5E5BA500E04A24 /* UIViewController+Ext.swift */; };
+		B8EE8FC02BA321BA0060BC0F /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EE8FBF2BA321BA0060BC0F /* Camera.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +59,8 @@
 		B87DE66D2B5A69700090E79A /* Camera.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
 		B87DE6702B5A6BD80090E79A /* CameraVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraVC.swift; sourceTree = "<group>"; };
 		B87DE6722B5A6BE30090E79A /* CameraVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraVM.swift; sourceTree = "<group>"; };
+		B88822FA2BA966CE003FAAA0 /* UIWindow+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Ext.swift"; sourceTree = "<group>"; };
+		B88822FC2BA966E4003FAAA0 /* UIAlertController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Ext.swift"; sourceTree = "<group>"; };
 		B8C62D682B96E1A60022FD5B /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		B8C62D6B2B96E1CD0022FD5B /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		B8C62D6D2B96E4E30022FD5B /* InitialSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSettingViewModel.swift; sourceTree = "<group>"; };
@@ -63,6 +68,7 @@
 		B8C818C62B918A32000EF101 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		B8D035D82B5A5131001E7D2A /* PermissionSettingVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSettingVM.swift; sourceTree = "<group>"; };
 		B8DD200F2B5E5BA500E04A24 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
+		B8EE8FBF2BA321BA0060BC0F /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		E5012536B59713E506DB4EFD /* Pods_heyGongC_Camera.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_heyGongC_Camera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -128,6 +134,8 @@
 				B8DD200F2B5E5BA500E04A24 /* UIViewController+Ext.swift */,
 				B86F58952B5A5BBD00156BC9 /* Design+Ext.swift */,
 				B8C62D712B97072E0022FD5B /* DefaultsKeys+Ext.swift */,
+				B88822FA2BA966CE003FAAA0 /* UIWindow+Ext.swift */,
+				B88822FC2BA966E4003FAAA0 /* UIAlertController+Ext.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -139,6 +147,7 @@
 				B86F589D2B5A60ED00156BC9 /* GCColor.swift */,
 				B8C818C62B918A32000EF101 /* Util.swift */,
 				B85FE1D92B9C657600DCA166 /* SoundAnalyzer.swift */,
+				B8EE8FBF2BA321BA0060BC0F /* Camera.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -365,7 +374,10 @@
 				B87DE6712B5A6BD80090E79A /* CameraVC.swift in Sources */,
 				B85F6CCD2B958DA2006E08D0 /* APIService.swift in Sources */,
 				B8C818C72B918A32000EF101 /* Util.swift in Sources */,
+				B88822FD2BA966E4003FAAA0 /* UIAlertController+Ext.swift in Sources */,
 				B8C62D722B97072E0022FD5B /* DefaultsKeys+Ext.swift in Sources */,
+				B88822FB2BA966CE003FAAA0 /* UIWindow+Ext.swift in Sources */,
+				B8EE8FC02BA321BA0060BC0F /* Camera.swift in Sources */,
 				B85FE1DA2B9C657600DCA166 /* SoundAnalyzer.swift in Sources */,
 				B86F58962B5A5BBD00156BC9 /* Design+Ext.swift in Sources */,
 				B8DD20102B5E5BA500E04A24 /* UIViewController+Ext.swift in Sources */,

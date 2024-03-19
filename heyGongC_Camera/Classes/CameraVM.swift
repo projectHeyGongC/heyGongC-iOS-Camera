@@ -9,36 +9,47 @@ import Foundation
 import RxSwift
 import RxRelay
 import UIKit
+import AVFoundation
 
 class CameraVM {
     
-    //QR코드형식 - ("UUID Model명")
-    private var qrData: String?
     private var timer: Timer?
     private var soundData: [Double] = []
-    private var recorder: SoundAnalyzer = SoundAnalyzer()
+    private var recorder: SoundAnalyzer!
+    private var camera: Camera!
+    private let context = CIContext()
     
     var bag = DisposeBag()
     
-    var successAddDevice = PublishRelay<Bool>()
+    var successConnectDevice = PublishRelay<Bool>()
     var soundDataRelay = PublishRelay<Double>()
     var recordingSubject = PublishSubject<Bool>()
-    
+    var successGenerateQRImage = PublishSubject<UIImage?>()
+    var hiddenQRCode = BehaviorRelay(value: true)
+
     init(){
-        recorder.onRecordingProcessed = { averageTopTenPercent in
-            DispatchQueue.main.async { [weak self] in
-                guard let self else { return }
-                print("Processed Value: \(averageTopTenPercent)") // Diagnostic log
-                soundDataRelay.accept(averageTopTenPercent)
-            }
-        }
-        
+        self.camera = Camera()
+        self.recorder = SoundAnalyzer()
         bind()
     }
     
     private func bind(){
+        successConnectDevice
+            .bind { [weak self] in
+                guard let self else { return }
+                
+                if $0 {
+                    hiddenQRCode.accept($0)
+                } else {
+                    self.getQRImage()
+                }
+                
+                //self.viewModel.recordingSubject.onNext($0)
+            }
+            .disposed(by: bag)
+        
         recordingSubject
-            .subscribe{ [weak self] in
+            .bind { [weak self] in
                 guard let self else { return }
                 if $0 {
                     startRecordingCycle()
@@ -58,8 +69,56 @@ class CameraVM {
                 
                 soundData.append(sound)
                 
-            }.disposed(by: bag)
+            }
+            .disposed(by: bag)
+        
+        recorder.onRecordingProcessed = { averageTopTenPercent in
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+                print("Processed Value: \(averageTopTenPercent)") // Diagnostic log
+                soundDataRelay.accept(averageTopTenPercent)
+            }
+        }
     }
+    
+    public func checkDeviceConnection(){
+        successConnectDevice.accept(false)
+    }
+    
+    public func getQRImage(){
+        
+        let filter = CIFilter.qrCodeGenerator()
+        filter.setValue(generateQRCodeData(), forKey: "inputMessage")
+
+        guard let qrCodeImage = filter.outputImage else {
+            successGenerateQRImage.onNext(nil)
+            return
+        }
+        
+        let transform = CGAffineTransform(scaleX: 5, y: 5)
+        let scaledCIImage = qrCodeImage.transformed(by: transform)
+        
+        guard let qrCodeCGImage = context.createCGImage(scaledCIImage, from: scaledCIImage.extent) else {
+            successGenerateQRImage.onNext(nil)
+            return
+        }
+        
+        successGenerateQRImage.onNext(UIImage(cgImage: qrCodeCGImage))
+        
+    }
+    
+    private func generateQRCodeData()-> Data? {
+        //UUID 기기번호 형식
+        let qrStr = Util.shared.uuid + " \(Util.shared.deviceName)"
+        print("qrStr: \(qrStr)")
+        guard let qrData = qrStr.data(using: .utf8) else { return nil }
+        
+        return qrData
+    }
+}
+
+//소리 감지 관련
+extension CameraVM {
     
     private func startRecordingCycle() {
         startRecording()
@@ -80,18 +139,24 @@ class CameraVM {
         timer = nil
         recorder.stopRecording()
     }
+}
+
+//카메라 관련
+extension CameraVM {
     
-    public func generateQRCodeData()-> Data? {
-        let device = UIDevice.current
-        let selName = "_\("deviceInfo")ForKey:"
-        let selector = NSSelectorFromString(selName)
-        
-        if device.responds(to: selector){
-            let modelName = String(describing: device.perform(selector, with: "marketing-name").takeRetainedValue())
-            qrData = Util.getUUID() + " \(modelName)"
-            return qrData?.data(using: .utf8)
-        }
-        return nil
+    public var cameraLayer: AVCaptureVideoPreviewLayer {
+        return camera.cameraLayer
     }
     
+    public func startCamera(){
+        camera.start()
+    }
+    
+    public func stopCamera(){
+        camera.stop()
+    }
+    
+    public func setCameraFrame(frame: CGRect){
+        camera.setCameraFrame(frame: frame)
+    }
 }

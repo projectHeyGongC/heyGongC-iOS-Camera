@@ -14,19 +14,19 @@ import AVFoundation
 class InitialSettingViewModel {
     
     let bag = DisposeBag()
-    private var errorHandler = BehaviorRelay<GCError?>(value: nil)
+    var errorHandler = BehaviorRelay<GCError?>(value: nil)
     let isValidAccessTokenRelay = PublishRelay<Bool>()
-    let checkAllPermsiionsRelay = PublishRelay<Bool>()
+    let checkAllPermissionsRelay = PublishRelay<Bool>()
     
     init(){
         isValidAccessToken()
     }
     
-    func checkAllPermissions(){
+    func checkAllPermissions(completion: @escaping ((Bool) -> ())){
         if AVCaptureDevice.authorizationStatus(for: .video) == .authorized && AVCaptureDevice.authorizationStatus(for: .audio) == .authorized {
-            checkAllPermsiionsRelay.accept(true)
+            completion(true)
         } else {
-            checkAllPermsiionsRelay.accept(false)
+            completion(false)
         }
         
     }
