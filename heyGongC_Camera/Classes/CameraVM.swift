@@ -108,8 +108,9 @@ class CameraVM {
     }
     
     private func generateQRCodeData()-> Data? {
-        //UUID 기기번호 형식
-        let qrStr = Util.shared.uuid + " \(Util.shared.deviceName)"
+        // qr데이터 형식 : "HeygongC_${deviceId}"
+        /// jyj 20240320 메인 앱 qr 유효성검사  방법 수정 필요
+        let qrStr = "HeyGongC_\(Util.shared.uuid)"
         print("qrStr: \(qrStr)")
         guard let qrData = qrStr.data(using: .utf8) else { return nil }
         
