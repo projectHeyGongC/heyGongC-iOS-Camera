@@ -36,7 +36,7 @@ class Util {
     }
     
     //배터리 잔여량
-    var batteryLevel: Int? {
+    var batteryLevel: Int {
         return Int(UIDevice.current.batteryLevel) * 100
     }
 

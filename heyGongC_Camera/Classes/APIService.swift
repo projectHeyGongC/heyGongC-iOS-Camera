@@ -7,79 +7,22 @@
 
 import Foundation
 import Moya
-import RxSwift
 
-enum APIService {
-    case token
-}
 
-extension APIService: TargetType {
-    var baseURL: URL {
-        return URL(string: "http://15.165.133.184/v1")!
+class APIService {
+    
+    static let shared = APIService()
+    
+    let baseUrl = "http://15.165.133.184/v1/cameras"
+    
+    public func getHeader() -> [String: String] {
+        return [
+            "accept": "application/json",
+            "Content-Type": "application/json"
+        ]
     }
     
-    var path: String {
-        switch self {
-        case .token:
-            return "users/token"
-        }
-    }
-    
-    var method: Moya.Method {
-        switch self {
-        case .token:
-            return .get
-        }
-    }
-    
-    var task: Moya.Task {
-        switch self {
-        case .token:
-            return .requestParameters(parameters: ["deviceId" : Util.shared.uuid], encoding: URLEncoding.queryString)
-        }
-    }
-    
-    var headers: [String : String]? {
-        switch self {
-        case .token:
-            return [
-                "Content-Type": "text/plain",
-                "Accept" : "text/plain"
-            ]
-        }
-    }
-}
-
-class DeviceAPI {
-    
-    static let shared = DeviceAPI()
-    
-    private let deviceProvider = MoyaProvider<APIService>(plugins: [MoyaLoggingPlugin()])
-    private let disposeBag = DisposeBag()
-    
-    enum NetworkResult<T> {
-        case success(T?)
-        case error(GCError)
-    }
-    
-    public func networking<T:Codable>(type: T.Type = String.self) -> Single<NetworkResult<T>> {
-        return Single<NetworkResult<T>>.create { single in
-            self.deviceProvider.request(.token) { result in
-                switch result {
-                case .success(let response):
-                    print("response: \(response)")
-                    single(.success(self.judgeStatus(response: response, type: type)))
-                case .failure(let error):
-                    single(.failure(error))
-                    return
-                }
-            }
-            return Disposables.create()
-        }
-        
-    }
-    
-    private func judgeStatus<T: Codable>(response: Response, type: T.Type = String.self) -> NetworkResult<T> {
+    public func judgeStatus<T: Codable>(response: Response, type: T.Type = String.self) -> NetworkResult<T> {
         let decoder = JSONDecoder()
         switch response.statusCode {
         case 200:
@@ -107,4 +50,9 @@ class DeviceAPI {
             return .error(.notFoundCode)
         }
     }
+}
+
+public enum NetworkResult<T> {
+    case success(T?)
+    case error(GCError)
 }

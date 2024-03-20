@@ -32,7 +32,8 @@ class InitialSettingViewModel {
     }
     
     func isValidAccessToken(){
-        DeviceAPI.shared.networking()
+        let param = CameraParam.RequestSubscribeData()
+        CameraAPI.shared.networking(cameraService: .subscribe(param: param), type: TokenModel.self)
             .subscribe(with: self, onSuccess: { owner, networkResult in
                 switch networkResult {
                 case .success(let data):
@@ -40,7 +41,7 @@ class InitialSettingViewModel {
                         self.isValidAccessTokenRelay.accept(false)
                         return
                     }
-                    Defaults.ACCESS_TOKEN = data
+                    UserDefaults.standard.set(data.accessToken, forKey: UserDefaultsKey.accessToken.rawValue)
                     print("isValidAccessToken is True")
                     self.isValidAccessTokenRelay.accept(true)
                 case .error(let error):
