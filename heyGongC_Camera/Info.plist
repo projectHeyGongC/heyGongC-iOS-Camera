@@ -7,14 +7,6 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
-	<key>NSLocalNetworkUsageDescription</key>
-	<string>이 앱은 사용자가 사용하는 네트워크에 있는 기기를 찾고 기기와 연결할 수 있게 됩니다.</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>CCTV 및 소리감지지 활성화를 위해 마이크 권한이 필요합니다.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>CCTV 및 소리감지지 활성화를 위해 카메라 권한이 필요합니다.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -34,5 +26,9 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 </dict>
 </plist>

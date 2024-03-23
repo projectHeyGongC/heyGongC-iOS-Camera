@@ -38,6 +38,10 @@ def common_pods
   pod 'lottie-ios', '~> 3.3.0'
   pod 'Action'
   pod 'TAKUUID'
+
+  # Firebase
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Messaging'
   
 end
 

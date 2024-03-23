@@ -29,6 +29,7 @@
 		B88822FD2BA966E4003FAAA0 /* UIAlertController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88822FC2BA966E4003FAAA0 /* UIAlertController+Ext.swift */; };
 		B88823012BAB152F003FAAA0 /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88823002BAB152E003FAAA0 /* CameraModel.swift */; };
 		B88823032BAB1E6E003FAAA0 /* CameraAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88823022BAB1E6E003FAAA0 /* CameraAPI.swift */; };
+		B89A9E632BAEA08800E994EB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B89A9E622BAEA08800E994EB /* GoogleService-Info.plist */; };
 		B8C62D692B96E1A60022FD5B /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8C62D682B96E1A60022FD5B /* Splash.storyboard */; };
 		B8C62D6C2B96E1CD0022FD5B /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C62D6B2B96E1CD0022FD5B /* SplashView.swift */; };
 		B8C62D6E2B96E4E30022FD5B /* InitialSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C62D6D2B96E4E30022FD5B /* InitialSettingViewModel.swift */; };
@@ -64,6 +65,7 @@
 		B88822FC2BA966E4003FAAA0 /* UIAlertController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Ext.swift"; sourceTree = "<group>"; };
 		B88823002BAB152E003FAAA0 /* CameraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
 		B88823022BAB1E6E003FAAA0 /* CameraAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraAPI.swift; sourceTree = "<group>"; };
+		B89A9E622BAEA08800E994EB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B8C62D682B96E1A60022FD5B /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		B8C62D6B2B96E1CD0022FD5B /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		B8C62D6D2B96E4E30022FD5B /* InitialSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSettingViewModel.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 		B8D035D82B5A5131001E7D2A /* PermissionSettingVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSettingVM.swift; sourceTree = "<group>"; };
 		B8DD200F2B5E5BA500E04A24 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		B8EE8FBF2BA321BA0060BC0F /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		B8FC22792BAEA3320060468E /* heyGongC_CameraRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = heyGongC_CameraRelease.entitlements; sourceTree = "<group>"; };
 		E5012536B59713E506DB4EFD /* Pods_heyGongC_Camera.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_heyGongC_Camera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -123,9 +126,11 @@
 		B8322BAA2B5A207D0063C45D /* heyGongC_Camera */ = {
 			isa = PBXGroup;
 			children = (
+				B8FC22792BAEA3320060468E /* heyGongC_CameraRelease.entitlements */,
 				B8D035D62B5A5081001E7D2A /* Storyboard */,
 				B8D035D22B5A5035001E7D2A /* Classes */,
 				B8322BB42B5A207F0063C45D /* Assets.xcassets */,
+				B89A9E622BAEA08800E994EB /* GoogleService-Info.plist */,
 				B8322BB92B5A207F0063C45D /* Info.plist */,
 			);
 			path = heyGongC_Camera;
@@ -263,6 +268,8 @@
 			dependencies = (
 			);
 			name = heyGongC_Camera;
+			packageProductDependencies = (
+			);
 			productName = heyGongC_Camera;
 			productReference = B8322BA82B5A207D0063C45D /* heyGongC_Camera.app */;
 			productType = "com.apple.product-type.application";
@@ -291,6 +298,8 @@
 				Base,
 			);
 			mainGroup = B8322B9F2B5A207D0063C45D;
+			packageReferences = (
+			);
 			productRefGroup = B8322BA92B5A207D0063C45D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -310,6 +319,7 @@
 				B87DE66E2B5A69700090E79A /* Camera.storyboard in Resources */,
 				B8C62D692B96E1A60022FD5B /* Splash.storyboard in Resources */,
 				B8322BB32B5A207D0063C45D /* PermissionSetting.storyboard in Resources */,
+				B89A9E632BAEA08800E994EB /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -545,10 +555,14 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = heyGongC_Camera/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "어이, 공씨 - 카메라 앱";
+				INFOPLIST_KEY_NSCameraUsageDescription = "CCTV 및 소리감지지 활성화를 위해 카메라 권한이 필요합니다.";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "이 앱은 사용자가 사용하는 네트워크에 있는 기기를 찾고 기기와 연결할 수 있게 됩니다.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "CCTV 및 소리감지지 활성화를 위해 마이크 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -569,6 +583,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = heyGongC_Camera/heyGongC_CameraRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CHX2C8U843;
@@ -577,17 +592,21 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = heyGongC_Camera/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "어이, 공씨 - 카메라 앱";
+				INFOPLIST_KEY_NSCameraUsageDescription = "CCTV 및 소리감지지 활성화를 위해 카메라 권한이 필요합니다.";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "이 앱은 사용자가 사용하는 네트워크에 있는 기기를 찾고 기기와 연결할 수 있게 됩니다.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "CCTV 및 소리감지지 활성화를 위해 마이크 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.heyGongC-Camera";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.heyGongC.heyGongC-Camera";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

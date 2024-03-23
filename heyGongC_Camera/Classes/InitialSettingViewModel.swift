@@ -19,7 +19,7 @@ class InitialSettingViewModel {
     let checkAllPermissionsRelay = PublishRelay<Bool>()
     
     init(){
-        isValidAccessToken()
+        //isValidAccessToken()
     }
     
     func checkAllPermissions(completion: @escaping ((Bool) -> ())){
