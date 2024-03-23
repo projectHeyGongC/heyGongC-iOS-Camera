@@ -37,6 +37,9 @@
 		B8D035D92B5A5131001E7D2A /* PermissionSettingVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D035D82B5A5131001E7D2A /* PermissionSettingVM.swift */; };
 		B8DD20102B5E5BA500E04A24 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DD200F2B5E5BA500E04A24 /* UIViewController+Ext.swift */; };
 		B8EE8FC02BA321BA0060BC0F /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EE8FBF2BA321BA0060BC0F /* Camera.swift */; };
+		CADAC1202BAEBF1A004351C2 /* Push.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADAC11F2BAEBF1A004351C2 /* Push.swift */; };
+		CADAC1222BAEC214004351C2 /* CVal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADAC1212BAEC214004351C2 /* CVal.swift */; };
+		CADAC1282BAEC300004351C2 /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADAC1272BAEC300004351C2 /* DefaultsKeys.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +77,10 @@
 		B8DD200F2B5E5BA500E04A24 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		B8EE8FBF2BA321BA0060BC0F /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		B8FC22792BAEA3320060468E /* heyGongC_CameraRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = heyGongC_CameraRelease.entitlements; sourceTree = "<group>"; };
+		CADAC11F2BAEBF1A004351C2 /* Push.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Push.swift; sourceTree = "<group>"; };
+		CADAC1212BAEC214004351C2 /* CVal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVal.swift; sourceTree = "<group>"; };
+		CADAC1272BAEC300004351C2 /* DefaultsKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsKeys.swift; sourceTree = "<group>"; };
+		CADAC1292BAEC3B1004351C2 /* heyGongC_Camera.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = heyGongC_Camera.entitlements; sourceTree = "<group>"; };
 		E5012536B59713E506DB4EFD /* Pods_heyGongC_Camera.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_heyGongC_Camera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -126,6 +133,7 @@
 		B8322BAA2B5A207D0063C45D /* heyGongC_Camera */ = {
 			isa = PBXGroup;
 			children = (
+				CADAC1292BAEC3B1004351C2 /* heyGongC_Camera.entitlements */,
 				B8FC22792BAEA3320060468E /* heyGongC_CameraRelease.entitlements */,
 				B8D035D62B5A5081001E7D2A /* Storyboard */,
 				B8D035D22B5A5035001E7D2A /* Classes */,
@@ -150,7 +158,9 @@
 		B86F589C2B5A60E200156BC9 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				CADAC11F2BAEBF1A004351C2 /* Push.swift */,
 				B844E2802B9EF017006BB780 /* PCMDataProcessor.swift */,
+				CADAC1212BAEC214004351C2 /* CVal.swift */,
 				B86F589D2B5A60ED00156BC9 /* GCColor.swift */,
 				B8C818C62B918A32000EF101 /* Util.swift */,
 				B85FE1D92B9C657600DCA166 /* SoundAnalyzer.swift */,
@@ -213,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				B85F6CCA2B958D9A006E08D0 /* Localized.swift */,
+				CADAC1272BAEC300004351C2 /* DefaultsKeys.swift */,
 				B8322BAB2B5A207D0063C45D /* AppDelegate.swift */,
 				B8322BAD2B5A207D0063C45D /* SceneDelegate.swift */,
 			);
@@ -379,12 +390,14 @@
 				B87DE6732B5A6BE30090E79A /* CameraVM.swift in Sources */,
 				B88823032BAB1E6E003FAAA0 /* CameraAPI.swift in Sources */,
 				B844E2812B9EF017006BB780 /* PCMDataProcessor.swift in Sources */,
+				CADAC1282BAEC300004351C2 /* DefaultsKeys.swift in Sources */,
 				B8D035D92B5A5131001E7D2A /* PermissionSettingVM.swift in Sources */,
 				B85F6CC92B958D88006E08D0 /* MoyaLoggingPlugin.swift in Sources */,
 				B86F589E2B5A60ED00156BC9 /* GCColor.swift in Sources */,
 				B8322BAE2B5A207D0063C45D /* SceneDelegate.swift in Sources */,
 				B85F6CCF2B958DC3006E08D0 /* GCError.swift in Sources */,
 				B8C62D6E2B96E4E30022FD5B /* InitialSettingViewModel.swift in Sources */,
+				CADAC1202BAEBF1A004351C2 /* Push.swift in Sources */,
 				B87DE6712B5A6BD80090E79A /* CameraVC.swift in Sources */,
 				B85F6CCD2B958DA2006E08D0 /* APIService.swift in Sources */,
 				B8C818C72B918A32000EF101 /* Util.swift in Sources */,
@@ -394,6 +407,7 @@
 				B88823012BAB152F003FAAA0 /* CameraModel.swift in Sources */,
 				B85FE1DA2B9C657600DCA166 /* SoundAnalyzer.swift in Sources */,
 				B86F58962B5A5BBD00156BC9 /* Design+Ext.swift in Sources */,
+				CADAC1222BAEC214004351C2 /* CVal.swift in Sources */,
 				B8DD20102B5E5BA500E04A24 /* UIViewController+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -547,6 +561,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = heyGongC_Camera/heyGongC_Camera.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CHX2C8U843;
