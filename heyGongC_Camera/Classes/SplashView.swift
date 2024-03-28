@@ -18,6 +18,8 @@ class SplashView: UIViewController {
         super.viewDidLoad()
         bind()
         setErrorHandler()
+        
+        self.viewModel.isValidAccessToken()
     }
     
     override func viewDidAppear(_ animated: Bool) {

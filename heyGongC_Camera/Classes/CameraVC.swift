@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import SnapKit
 import RxSwift
+import RxOptional
 import RxCocoa
 import SwiftyUserDefaults
 import CoreImage.CIFilterBuiltins
@@ -29,6 +30,7 @@ class CameraVC: UIViewController {
         super.viewDidLoad()
     
         setUI()
+        setErrorHandler()
         bindAction()
         
         //소리감지 테스트 위해 추가
@@ -36,8 +38,8 @@ class CameraVC: UIViewController {
         viewQRCode.addGestureRecognizer(tapGesture)
         tapGesture.addTarget(self, action: #selector(didTapView))
         
-        viewModel.checkDeviceConnection()
-        
+        //카메라 연동 되어있는지 체크
+        viewModel.checkDevicePaired()
     }
     
     override func viewDidLayoutSubviews() {
@@ -66,11 +68,12 @@ class CameraVC: UIViewController {
     
     private func bindAction(){
         viewModel.successGenerateQRImage
+            .observe(on: MainScheduler.instance)
             .bind { [weak self] image in
                 guard let self else { return }
                 
                 guard let image = image else {
-                    self.showAlertForQRGenerationFailure()
+                    showAlertForQRGenerationFailure()
                     return
                 }
                 
@@ -82,16 +85,16 @@ class CameraVC: UIViewController {
         
         viewModel.hiddenQRCode
             .bind {
+                print("value: \($0)")
                 self.viewQRCode.isHidden = $0
             }
             .disposed(by: viewModel.bag)
-        
     }
     
     @objc func didTapView(){
         isTappedViewQRCode.toggle()
         print("isTappedViewQRCode:\(isTappedViewQRCode)")
-        viewModel.successConnectDevice.accept(isTappedViewQRCode)
+        viewModel.successPaired.accept(isTappedViewQRCode)
     }
     
     
@@ -102,4 +105,35 @@ class CameraVC: UIViewController {
             self.view.makeToast(Localized.ERROR_MSG.txt)
         }
     }
+}
+
+extension CameraVC {
+    private func setErrorHandler() {
+            viewModel.errorHandler
+                .filterNil()
+                .bind { [weak self] in
+                    guard let self else { return }
+                    setErrorHandler(error: $0)
+                }
+                .disposed(by: viewModel.bag)
+        }
+        
+        private func setErrorHandler(error: Error?) {
+            
+            guard let e = error as? GCError else {
+                // 알 수 없는 에러
+                print(error?.localizedDescription ?? "")
+                GCError.notFoundCode.showErrorMsg(target: self.view)
+                return
+            }
+            
+            switch e {
+            case .unauthorized:
+                break
+            default:
+                print("🔋🔋🔋🔋 \(error?.localizedDescription ?? "")")
+                e.showErrorMsg(target: self.view)
+                break
+            }
+        }
 }

@@ -22,7 +22,7 @@ extension CameraService : TargetType, AccessTokenAuthorizable {
     var authorizationType: Moya.AuthorizationType? {
         switch self {
             
-        case .subscribe(param: let param):
+        case .subscribe(param: _):
             return .none
         default:
             return .bearer
@@ -49,9 +49,9 @@ extension CameraService : TargetType, AccessTokenAuthorizable {
     var method: Moya.Method {
         switch self {
             
-        case .subscribe(param: let param):
+        case .subscribe(param: _):
             return .post
-        case .updateStatus(param: let param):
+        case .updateStatus(param: _):
             return .put
         case .inquireStatus, .settings, .soundOccur:
             return .get

@@ -7,6 +7,7 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 import RxRelay
 import UIKit
 import AVFoundation
@@ -20,28 +21,35 @@ class CameraVM {
     private let context = CIContext()
     
     var bag = DisposeBag()
+    var errorHandler = BehaviorRelay<GCError?>(value: nil)
     
-    var successConnectDevice = PublishRelay<Bool>()
+    var successPaired = PublishRelay<Bool>()
+    var successGenerateQRImage = PublishSubject<UIImage?>()
+    var hiddenQRCode = PublishRelay<Bool>()
+    var showAlert: Signal<Void>?
     var soundDataRelay = PublishRelay<Double>()
     var recordingSubject = PublishSubject<Bool>()
-    var successGenerateQRImage = PublishSubject<UIImage?>()
-    var hiddenQRCode = BehaviorRelay(value: true)
-
+    
     init(){
         self.camera = Camera()
         self.recorder = SoundAnalyzer()
+        
         bind()
     }
     
+    deinit {
+        bag = DisposeBag()
+    }
+    
     private func bind(){
-        successConnectDevice
+        successPaired
             .bind { [weak self] in
                 guard let self else { return }
                 
                 if $0 {
                     hiddenQRCode.accept($0)
                 } else {
-                    self.getQRImage()
+                    getQRImage()
                 }
                 
                 //self.viewModel.recordingSubject.onNext($0)
@@ -81,8 +89,23 @@ class CameraVM {
         }
     }
     
-    public func checkDeviceConnection(){
-        successConnectDevice.accept(false)
+    public func checkDevicePaired(){
+        CameraAPI.shared.networking(cameraService: .inquireStatus, type: CameraPairedResponse.self)
+            .subscribe(with: self, onSuccess: { owner, networkResult in
+                switch networkResult {
+                case .success(let response):
+                    guard let result = response?.isPaired else {
+                        self.errorHandler.accept(GCError.errorDecoding)
+                        return
+                    }
+                    self.successPaired.accept(result)
+                case .error(let error):
+                    self.errorHandler.accept(error)
+                }
+            }, onFailure: { owner, error in
+                print(" checkDevicePaired - error")
+            })
+            .disposed(by: bag)
     }
     
     public func getQRImage(){

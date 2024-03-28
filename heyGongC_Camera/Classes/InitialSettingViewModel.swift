@@ -16,11 +16,7 @@ class InitialSettingViewModel {
     let bag = DisposeBag()
     var errorHandler = BehaviorRelay<GCError?>(value: nil)
     let isValidAccessTokenRelay = PublishRelay<Bool>()
-    let checkAllPermissionsRelay = PublishRelay<Bool>()
-    
-    init(){
-        //isValidAccessToken()
-    }
+    let checkAllPermissionsSubject = PublishSubject<Bool>()
     
     func checkAllPermissions(completion: @escaping ((Bool) -> ())){
         if AVCaptureDevice.authorizationStatus(for: .video) == .authorized && AVCaptureDevice.authorizationStatus(for: .audio) == .authorized {
@@ -33,7 +29,7 @@ class InitialSettingViewModel {
     
     func isValidAccessToken(){
         let param = CameraParam.RequestSubscribeData()
-        CameraAPI.shared.networking(cameraService: .subscribe(param: param), type: TokenModel.self)
+        CameraAPI.shared.networking(cameraService: .subscribe(param: param), type: CameraSubscribeResponse.self)
             .subscribe(with: self, onSuccess: { owner, networkResult in
                 switch networkResult {
                 case .success(let data):
